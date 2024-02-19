@@ -39,3 +39,4 @@ public class File_read_write{
     }
 }
 
+//The new.txt and out.txt are are input and output files for testing.
