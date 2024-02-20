@@ -1,3 +1,5 @@
+package PPS_related_codes;
+
 import java.util.Scanner;
 
 public class Scanner_class {
