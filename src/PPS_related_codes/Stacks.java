@@ -114,3 +114,126 @@ public class Main {
         scanner.close();
     }
 }
+
+///Oops im not allowed to use Stack i shoukld only use primitive arrays
+//
+//
+//Stack USING ARRAYS
+import java.util.Scanner;
+
+public class Main {
+    private static final int MAX_SIZE = 100; // Maximum size of the stack
+    private static int[] stack = new int[MAX_SIZE];
+    private static int top = -1; // Top of the stack
+
+    // Push operation
+    private static void push(int value) {
+        if (top == MAX_SIZE - 1) {
+            System.out.println("Stack overflow. Cannot push more elements.");
+        } else {
+            top++;
+            stack[top] = value;
+            System.out.println("Pushed element: " + value);
+        }
+    }
+
+    // Pop operation
+    private static void pop() {
+        if (top == -1) {
+            System.out.println("Stack is empty. Cannot pop.");
+        } else {
+            System.out.println("Popped element: " + stack[top]);
+            top--;
+        }
+    }
+
+    // Peek operation
+    private static void peek() {
+        if (top == -1) {
+            System.out.println("Stack is empty. No top element to peek.");
+        } else {
+            System.out.println("Top element of the stack: " + stack[top]);
+        }
+    }
+
+    // Check if stack is empty
+    private static boolean isEmpty() {
+        return (top == -1);
+    }
+
+    // Check if stack is full
+    private static boolean isFull() {
+        return (top == MAX_SIZE - 1);
+    }
+
+    // Size of the stack
+    private static int size() {
+        return top + 1;
+    }
+
+    // Search operation
+    private static int search(int value) {
+        for (int i = top; i >= 0; i--) {
+            if (stack[i] == value) {
+                return top - i + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter space-separated integers to push onto the stack (e.g., 1 2 3): ");
+        String inputLine = scanner.nextLine();
+        String[] inputValues = inputLine.split(" ");
+
+        // Pushing elements onto the stack
+        for (String value : inputValues) {
+            try {
+                int intValue = Integer.parseInt(value);
+                push(intValue);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter integers separated by spaces.");
+                return;
+            }
+        }
+
+        // Printing the initial stack
+        System.out.print("Initial Stack: ");
+        for (int i = 0; i <= top; i++) {
+            System.out.print(stack[i] + " ");
+        }
+        System.out.println();
+
+        // Pop operation example
+        if (!isEmpty()) {
+            pop();
+        } else {
+            System.out.println("Stack is empty. Cannot pop.");
+        }
+
+        // Peek operation example
+        peek();
+
+        // Search operation example
+        System.out.println("Enter an element to search in the stack: ");
+        int searchElement = scanner.nextInt();
+        int position = search(searchElement);
+        if (position != -1) {
+            System.out.println("Element found at position: " + position);
+        } else {
+            System.out.println("Element not found in the stack.");
+        }
+
+        // Size of the stack
+        System.out.println("Size of the stack: " + size());
+
+        // Check if stack is empty
+        System.out.println("Is stack empty? " + isEmpty());
+
+        scanner.close();
+    }
+}
+
+
