@@ -237,3 +237,209 @@ public class Main {
 }
 
 
+//STACK 1 - STACK WIUTH BOTH VAR AND INT - NORMAL PUSH POP SIZE
+
+public class Main {
+
+    String[] str;
+    int top;
+    Main() {
+        str = new String[10];
+        top = -1;
+    }
+
+    public void push(String val) {
+        if(str.length -1 == top) {
+            expand();
+        }
+        top++;
+        str[top] = val;
+    }
+
+    public String pop() {
+        if(top == -1) {
+            return "Empty Stack";
+        }
+
+        return str[top--];
+    }
+
+    public String top() {
+        if(top == -1) {
+            return "Empty Stack";
+        }
+        return str[top];
+    }
+
+    public int size() {
+        if(top == -1) return 0;
+        return top+1;
+    }
+
+    private void expand() {
+        String[] arr = new String[2*str.length];
+        int i=0;
+        for(String st : str) {
+            arr[i++] = st;
+        }
+        str = arr;
+    }
+
+    public static void main(String[] args) {
+        Main stack = new Main();
+        for(int i=0; i<10; i++)
+            stack.push("Hello"+(i+1));
+        System.out.println(stack.pop());
+        System.out.println(stack.top());
+        System.out.println(stack.size());
+        for(int i=10; i<50; i++)
+            stack.push("Hello"+(i+1));
+        System.out.println(stack.top());
+        System.out.println(stack.size());
+    }
+
+}
+
+//OUTPUT = Hello10
+//Hello9
+//9
+//Hello50
+//49
+
+
+ STACK _2 ASCENDIGN ORDER STAKC MAKER = Maybe take some from the real one
+import java.util.Scanner;
+
+public class Main {
+
+    int[] str;
+    int top;
+
+    Main() {
+        str = new int[10];
+        top = -1;
+    }
+
+    public void print() {
+        for (int i = 0; i <= top; i++) {
+            System.out.print(str[i] + " ");
+        }
+    }
+
+    public void push(int val) {
+        if (top == -1 || str[top] <= val) {
+            top++;
+            str[top] = val;
+        }
+    }
+
+    public Integer pop() {
+        if (top == -1) {
+            return -1;
+        }
+        return str[top--];
+    }
+
+    public Integer top() {
+        if (top == -1) {
+            return -1;
+        }
+        return str[top];
+    }
+
+    public int size() {
+        if (top == -1) return 0;
+        return top + 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String line = sc.nextLine();
+        String va[] = line.split(" ");
+        int c = 0;
+        Main st = new Main();
+        for (String value : va) {
+            st.push(Integer.parseInt(value));
+        }
+        st.print();
+    }
+
+}
+
+
+
+
+//Postfix Codeign problem - STACK 3
+import java.util.Scanner;
+
+public class Main {
+    String[] str;
+    int top;
+    Main() {
+        str = new String[10];
+        top = -1;
+    }
+
+    public void push(String val) {
+        if(str.length -1 == top) {
+            expand();
+        }
+        top++;
+        str[top] = val;
+    }
+
+    public String pop() {
+        if(top == -1) {
+            return "Empty Stack";
+        }
+
+        return str[top--];
+    }
+
+    public String top() {
+        if(top == -1) {
+            return "Empty Stack";
+        }
+        return str[top];
+    }
+
+    public int size() {
+        if(top == -1) return 0;
+        return top+1;
+    }
+
+    private void expand() {
+        String[] arr = new String[2*str.length];
+        int i=0;
+        for(String st : str) {
+            arr[i++] = st;
+        }
+        str = arr;
+    }
+    public static void main(String args[]) {
+        String str = "";
+        Scanner sc = new Scanner(System.in);
+        str = sc.nextLine();
+        String arr[] = str.split(" ");
+        Main st = new Main();
+        for(int i=0; i<arr.length; i++) {
+            if(arr[i].equals("+") || arr[i].equals("-") || arr[i].equals("/") || arr[i].equals("*")) {
+                int val1 = Integer.parseInt(st.pop());
+                int val2 = Integer.parseInt(st.pop());
+                if(arr[i].equals("+")) st.push(val1+val2+"");
+                if(arr[i].equals("-")) st.push(val2-val1+"");
+                if(arr[i].equals("/")) st.push((val2/val1)+"");
+                if(arr[i].equals("*")) st.push((val1*val2)+"");
+            }else {
+                st.push(arr[i]);
+            }
+        }
+        System.out.println(st.pop());
+    }
+}
+
+
+
+
+
+
