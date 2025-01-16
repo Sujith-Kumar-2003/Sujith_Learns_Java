@@ -16,46 +16,46 @@ public class Minimum_edits_for_password_security {
             String password = passwords[i];
             int editsRequired = 0;
 
-            // Condition 1: Check if the password length is exactly 10
-            if (password.length() != 10) {
-                editsRequired += Math.abs(password.length() - 10);
+            boolean hasUppercase = password.matches(".*[A-Z].*");
+            boolean hasLowercase = password.matches(".*[a-z].*");
+            boolean hasDigit = password.matches(".*[0-9].*");
+            boolean hasSpecial = password.matches(".*[@#$%&*].*");
 
-            }
+            int missingTypes = 0;
+            if (!hasUppercase) missingTypes++;
+            if (!hasLowercase) missingTypes++;
+            if (!hasDigit) missingTypes++;
+            if (!hasSpecial) missingTypes++;
 
-            // Condition 2: Check for at least one uppercase letter
-            if (!password.matches(".*[A-Z].*")) {
-                editsRequired++;
-            }
-
-            // Condition 3: Check for at least one lowercase letter
-            if (!password.matches(".*[a-z].*")) {
-                editsRequired++;
-            }
-
-            // Condition 4: Check for at least one digit
-            if (!password.matches(".*[0-9].*")) {
-                editsRequired++;
-            }
-
-            // Condition 5: Check for at least one special character (@, #, $, %, &, *)
-            if (!password.matches(".*[@#$%&*].*")) {
-                editsRequired++;
+            if (password.length() < 10) {
+                editsRequired = Math.max(missingTypes, 10 - password.length());
+            } else if (password.length() > 10) {
+                editsRequired = password.length() - 10 + missingTypes;
+            } else {
+                editsRequired = missingTypes;
             }
 
             editArray[i] = editsRequired;
         }
-        int minimum = 10;
-        String name = "";
-        for ( int i = 0 ; i < no_of_password; i ++){
-            if (editArray[i] < minimum){
+
+        int minimum = Integer.MAX_VALUE;
+        String bestPassword = "";
+        for (int i = 0; i < no_of_password; i++) {
+            if (editArray[i] < minimum) {
                 minimum = editArray[i];
-                name = passwords[i];
+                bestPassword = passwords[i];
             }
         }
-        System.out.println(name);
-        System.out.println(minimum);
 
+        System.out.println(bestPassword);
+        System.out.println(minimum);
 
         sc.close();
     }
 }
+
+//4
+//Password1
+//abcd123
+//$$secure$$
+//S3cur3It!
