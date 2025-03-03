@@ -9,19 +9,22 @@ public class Second {
 
         while(true){
             try{
-                System.out.println("Enter a number between 1 and 10");
-                k = Integer.parseInt(sc.nextLine());
-                if (k >=1 && k < 10){
+                System.out.println("Enter a number between 1 and 10:");
+                k = sc.nextInt();
+                if (k >= 1 && k <= 10){  // Using <= 10 to include 10 in the valid range.
                     System.out.println("The code is good");
                     break;
                 }
+                else{
+                    System.out.println("The number is out of range. Please try again.");
+                }
             }
             catch(InputMismatchException e){
-                System.out.println("The value you entered is wrong");
-                k = Integer.parseInt(sc.nextLine());
-
+                System.out.println("The value you entered is not a valid number. Please try again.");
+                sc.nextLine(); // Clear the invalid input from the scanner buffer.
             }
         }
-        System.out.println("the code completed");
+        System.out.println("The code completed");
+        sc.close();
     }
 }
