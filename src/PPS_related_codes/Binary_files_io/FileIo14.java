@@ -1,210 +1,107 @@
 package PPS_related_codes.Binary_files_io;
 
-// *******************************************************************
-// FileIO14.java By: Aiman Hanna (C) 1993 - 2025
-// This program illustrates how objects can be written to
-// and read from "binary" files.
-//
-// Key Points:
-// 1) Writing to & Reading from Binary Files.
-// 2) The Serializable Interface.
-// *******************************************************************
-
 import java.util.Scanner;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.EOFException;
-import java.io.Serializable;
-
-//Car Class - This class is a serializable class since it
-// implements the serializable interface
+import java.io.*;
 
 class Car implements Serializable {
-
-    // Attributes
-    private int numOfDoors;
+    private int num_of_doors;
     private double price;
-    private int numOfSeats;
+    private int num_of_seats;
 
-    // Constructors
-    public Car()	// default constructor
-    {
-        numOfDoors = 4;
-        price = 10000;
-        numOfSeats = 5;
+    public Car(){
+        num_of_doors = 4;
+        price = 10000; // Changed default price to match expected output.
+        num_of_seats = 5;
+    }
+    public Car(int nd, double pr, int ns){
+        this.num_of_doors = nd;
+        this.price = pr;
+        this.num_of_seats = ns;
     }
 
-    public Car(int nd, double pr, int ns)
-    {
-        numOfDoors = nd;
-        price = pr;
-        numOfSeats = ns;
-    }
-
-    public Car(Car c)
-    {
-        numOfDoors = c.numOfDoors;
+    public Car(Car c){
+        num_of_doors = c.num_of_doors;
         price = c.price;
-        numOfSeats = c.numOfSeats;
+        num_of_seats = c.num_of_seats;
     }
-
-    public int getNumOfDoors()
-    {
-        return numOfDoors;
+    public int getNum_of_doors(){
+        return num_of_doors;
     }
-
-    public void setNumOfDoors(int nd)
-    {
-        numOfDoors = nd;
-    }
-
-
-    public int getNumOfSeats()
-    {
-        return numOfSeats;
-    }
-
-    public void setNumOfSeats(int ns)
-    {
-        numOfSeats = ns;;
-    }
-
-    public void setPrice(double pr)
-    {
-        price = pr;
-    }
-
-    public double getPrice()
-    {
+    public double getPrice(){
         return price;
     }
-
-    public String toString()
-    {
-        return "This Car has " + getNumOfDoors() + " doors and its price is: " + getPrice() +
-                "$. The number of seats of this car is " + numOfSeats + ".";
+    public int getNum_of_seats(){
+        return num_of_seats;
     }
-}   // end of Car class
+    public void setNum_of_doors(int nd){
+        num_of_doors = nd;
+    }
+    public void setPrice(double pr){
+        price = pr;
+    }
+    public void setNum_of_seats(int ns){
+        num_of_seats = ns;
+    }
 
-
-
-
-
-public class FileIo14{
-
-    public static void main(String[] args)
-    {
-
-        // This program stores and reads objects to and from binary files
-
-        Car c1 = new Car(4, 12000, 5), c2 = new Car(2, 23000, 2), c3 = new Car();
-
-        String fileName;
-
-        Scanner kb = new Scanner(System.in);
-
-
-        System.out.print("Please enter the \"binary\" file name to which the objects should be stored: ");
-        fileName = kb.next();
-
-        ObjectOutputStream oos = null;
-        ObjectInputStream ois = null;
-
-
-        try
-        {
-            // Create an ObjectOutputStream to write into the binary file
-            oos = new ObjectOutputStream(new FileOutputStream(fileName));
-
-            // If this point is reached, then the stream was created successfully.
-            // So, start writing the objects to the file.
-            oos.writeObject(c1);
-            oos.writeObject(c2);
-            oos.writeObject(c3);
-
-            oos.close();
-            System.out.println("Objects have been written to the file " + fileName + ".");
-        }
-        catch(IOException e)
-        {
-            System.out.println("Error: Problem Reading from file: " + fileName + ".");
-            System.out.println("Program will terminate.");
-            System.exit(0);
-        }
-
-
-        // Now the file has been created; try to open it and read the objects
-        try
-        {
-            // Create an ObjectOutputStream to write into the binary file
-            ois = new ObjectInputStream(new FileInputStream(fileName));
-
-            // If this point is reached, then the stream was created successfully.
-            // So, start reading the objects from the file.
-            Car cr;
-            int i = 1;
-
-            System.out.println("\nWill start displaying the objects stored in file: \"" + fileName + "\".");
-            System.out.println("================================================================ ");
-            try
-            {
-                while(true)
-                {
-                    cr = (Car)ois.readObject();		// Notice the type cast here; this is the reason
-                    // that we need to handle ClassNotFoundException
-                    System.out.println("\nHere is the information of object # " + i++ + ":");
-                    System.out.println("====================================== ");
-                    System.out.println(cr);
-                }
-            }
-            catch(ClassNotFoundException e)
-            {
-                System.out.println("Error has occurred while reading the file: " + fileName + ".");
-            }
-            catch(EOFException e)
-            {
-                System.out.println("\nReading file \"" + fileName + "\" has been completed.");
-            }
-            ois.close();		// Close the file
-        }
-        catch(FileNotFoundException e)
-        {
-            System.out.println("File: " + fileName + " could not been found.");
-            System.out.println("Program will terminate.");
-            System.exit(0);
-        }
-        catch(IOException e)
-        {
-            System.out.println("Error: Problem Reading from file: " + fileName + ".");
-            System.out.println("Program will terminate.");
-            System.exit(0);
-        }
-
+    public String toString(){
+        return "The car has " + num_of_doors + " Doors and the price of the car is $ " +
+                price + " and the car has " + num_of_seats + " seats.";
     }
 }
 
-/* The Output
-Please enter the "binary" file name to which the objects should be stored: CarInfo.dat
-Objects have been written to the file CarInfo.dat.
+public class FileIo14 {
 
-Will start displaying the objects stored in file: "CarInfo.dat".
-================================================================
 
-Here is the information of object # 1:
-======================================
-This Car has 4 doors and its price is: 12000.0$. The number of seats of this car is 5.
+    public static void main(String[] args) throws IOException {
+            Car c1 = new Car(4, 3000, 5);
+            Car c2 = new Car(2, 23000, 2);
+            Car c3 = new Car();
+            System.out.println(c1.getPrice());
+            System.out.println(c2.getPrice());
+            Car c4 = new Car(c3);
+            System.out.println(c4.getNum_of_doors());
 
-Here is the information of object # 2:
-======================================
-This Car has 2 doors and its price is: 23000.0$. The number of seats of this car is 2.
+            String fileName;
+            Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name for the binary file: ");
+        fileName = sc.next();
 
-Here is the information of object # 3:
-======================================
-This Car has 4 doors and its price is: 10000.0$. The number of seats of this car is 5.
+        ObjectOutputStream oos = null;
+        try{
+    oos = new ObjectOutputStream(new FileOutputStream(fileName));
+    oos.writeObject(c1);
+    oos.writeObject(c2);
+    oos.writeObject(c3);
+    oos.writeObject(c4);
+    oos.close();
+    System.out.println("THe file has been written out");
+} catch (IOException e) {
+    System.out.println("Cannot find the file");
+    System.out.println("The system will now stop");
+    System.exit(0);
+}
 
-Reading file "CarInfo.dat" has been completed.
-*/
+ObjectInputStream ois = new ObjectInputStream(new FileInputStream("suji.dat"));
+Car cr;
+int i = 1;
+        System.out.println("This will now display the contetns of the dat file");
+
+        try{
+            while(true){
+                cr = (Car)ois.readObject();
+                System.out.println("Her is the info of the object #" + i++ + ": ");
+                System.out.println(cr);
+            }
+
+        } catch (ClassNotFoundException e){
+            System.out.println("THe class cant be found");
+        }
+        catch (EOFException e){
+            System.out.println("This si the end pf the file");
+            System.exit(0);
+        }
+        ois.close();
+
+
+    }
+}
