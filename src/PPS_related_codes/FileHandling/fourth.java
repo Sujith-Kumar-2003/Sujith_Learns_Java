@@ -26,6 +26,7 @@ public class fourth{
         try
         {
             pw = new PrintWriter(new FileOutputStream("/Users/sujithkumaravel/Downloads/Sujith_Learns_Java/src/PPS_related_codes/FileHandling/Info.txt"));
+
         }
         catch(FileNotFoundException e) 			// Since we are attempting to write to the file
         {							   			// exception is automatically thrown if file cannot be created.
