@@ -1,0 +1,223 @@
+package PPS_related_codes.LinkedList;
+import java.util.Scanner;
+
+class DoublyList {
+
+    // Node class for Doubly Linked List
+    class Node {
+        public int v;
+        public Node next;
+        public Node prev;
+
+        public Node() {
+            v = 0;
+            next = null;
+            prev = null;
+        }
+
+        public Node(int i, Node xt, Node pr) {
+            v = i;
+            next = xt;
+            prev = pr;
+        }
+    }
+
+    private Node head;
+    private Node tail;
+
+    public DoublyList() {
+        head = null;
+        tail = null;
+    }
+
+    // 1. addToStart
+    public void addToStart(int i) {
+        Node newNode = new Node(i, head, null);
+        if (head != null) {
+            head.prev = newNode;
+        }
+        head = newNode;
+        if (tail == null) { // If the list was empty
+            tail = head;
+        }
+    }
+
+    // 2. addToEnd
+    public void addToEnd(int i) {
+        Node newNode = new Node(i, null, tail);
+        if (tail != null) {
+            tail.next = newNode;
+        }
+        tail = newNode;
+        if (head == null) { // If the list was empty
+            head = tail;
+        }
+    }
+
+    // 3. DISPLAY
+    public void display() {
+        Node temp = head;
+        if (temp == null) {
+            System.out.println("The linked list is empty");
+        } else {
+            System.out.println("Here are the list elements");
+            while (temp != null) {
+                System.out.print(temp.v + " <-> ");
+                temp = temp.next;
+            }
+            System.out.println("X");
+        }
+    }
+
+    // 4. FIND
+    public Node find(int x) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == x) {
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
+    }
+
+    // 5. REPLACE
+    public void replace(int i, int x) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == i) {
+                temp.v = x;
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Value " + i + " not found in the list");
+    }
+
+    // 6. InsertAfter
+    public void insertAfter(int i, int x) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == i) {
+                Node newNode = new Node(x, temp.next, temp);
+                if (temp.next != null) {
+                    temp.next.prev = newNode;
+                }
+                temp.next = newNode;
+                if (temp == tail) {
+                    tail = newNode;
+                }
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Value " + i + " not found in the list");
+    }
+
+    // 7. InsertBefore
+    public void insertBefore(int i, int x) {
+        if (head == null) {
+            System.out.println("The linked list is empty");
+            return;
+        }
+        if (head.v == i) {
+            addToStart(x);
+            return;
+        }
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == i) {
+                Node newNode = new Node(x, temp, temp.prev);
+                temp.prev.next = newNode;
+                temp.prev = newNode;
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Value " + i + " not found in the list");
+    }
+
+    // 8. REMOVE
+    public void remove(int i) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == i) {
+                if (temp.prev != null) {
+                    temp.prev.next = temp.next;
+                } else {
+                    head = temp.next;
+                }
+                if (temp.next != null) {
+                    temp.next.prev = temp.prev;
+                } else {
+                    tail = temp.prev;
+                }
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Value " + i + " not found in the list");
+    }
+
+    // 9. SIZE
+    public int size() {
+        int count = 0;
+        Node temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+    // 10. CONTAINS
+    public boolean contains(int i) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.v == i) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+}
+
+public class DoublyLinkedLis {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+        Scanner sc = new Scanner(System.in);
+        DoublyList list = new DoublyList();
+
+        // Add elements to the list
+        list.addToStart(5);
+        list.addToStart(4);
+        list.addToEnd(12);
+        list.addToEnd(43);
+
+        // Replace element
+        list.replace(12, 23);
+
+        // Insert elements after and before
+        list.insertAfter(4, 6);
+        list.insertBefore(5, 3);
+
+        // Find element
+        DoublyList.Node v = list.find(43);
+        if (v != null) {
+            System.out.println("Found: " + v.v);
+        }
+
+        // Remove an element
+        list.remove(23);
+
+        // Display the list
+        list.display();
+
+        // Check if the list contains a value
+        System.out.println("Contains 6? " + list.contains(6));
+
+        // Get the size of the list
+        System.out.println("Size of list: " + list.size());
+    }
+}
