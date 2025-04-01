@@ -183,7 +183,7 @@ class DoublyList {
     }
 }
 
-public class DoublyLinkedLis {
+public class DoublyLinkedList {
     public static void main(String[] args) {
         System.out.println("Hello World");
         Scanner sc = new Scanner(System.in);
@@ -194,6 +194,9 @@ public class DoublyLinkedLis {
         list.addToStart(4);
         list.addToEnd(12);
         list.addToEnd(43);
+        DoublyList.Node b = list.find(43);
+        System.out.println(b.prev.v);
+        list.display();
 
         // Replace element
         list.replace(12, 23);
