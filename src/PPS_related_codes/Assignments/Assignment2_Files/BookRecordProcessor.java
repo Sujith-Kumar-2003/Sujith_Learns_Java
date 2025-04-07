@@ -1,4 +1,4 @@
-package PPS_related_codes.Assignments;
+package PPS_related_codes.Assignments.Assignment2_Files;
 
 // -----------------------------------------------------
 // Assignment 2

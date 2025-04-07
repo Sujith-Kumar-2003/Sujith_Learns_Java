@@ -1,4 +1,4 @@
-package PPS_related_codes.Assignments;//SUJITH KUMAR KUMARVEL 40281567, Jothi Basu LKV 40230416
+package PPS_related_codes.Assignments.Assignment2_Files;//SUJITH KUMAR KUMARVEL 40281567, Jothi Basu LKV 40230416
 // COMP6481 Assignment # Due Date
 //Assignment-2
 // Due 24 March

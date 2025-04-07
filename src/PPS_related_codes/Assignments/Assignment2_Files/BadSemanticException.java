@@ -1,4 +1,4 @@
-package PPS_related_codes.Assignments;
+package PPS_related_codes.Assignments.Assignment2_Files;
 
 //SUJITH KUMAR KUMARVEL 40281567
 // COMP6481 Assignment # Due Date
